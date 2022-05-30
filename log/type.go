@@ -4,7 +4,7 @@ import "time"
 
 const (
 	LabelStartup  string = "STARTUP   "
-	LabelMonitor  string = "MONITOR		"
+	LabelMonitor  string = "MONITOR   "
 	LabelShutdown string = "SHUTDOWN  "
 
 	levelInfo  string = "[INFO ]"
