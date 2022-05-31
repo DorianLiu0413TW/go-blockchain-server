@@ -2,17 +2,14 @@ package config
 
 import (
 	"crypto/ecdsa"
-	"encoding/hex"
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
 	"time"
-
 	
 	"go-blockchain-api/log"
-	"go-blockchain-api/utils"
-	
+
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
 )
@@ -93,95 +90,95 @@ func InitConfig() (err error) {
 	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "ALLOW_ORIGINS", allowOriginStrings))
 
 	//
-	Global.RelyingParty.ID = os.Getenv("RP_ID")
-	if err = validation.Validate(&Global.RelyingParty.ID, validation.Required); err != nil {
-		err = fmt.Errorf(`"RP_ID" %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "RP_ID", Global.RelyingParty.ID))
+	// Global.RelyingParty.ID = os.Getenv("RP_ID")
+	// if err = validation.Validate(&Global.RelyingParty.ID, validation.Required); err != nil {
+	// 	err = fmt.Errorf(`"RP_ID" %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "RP_ID", Global.RelyingParty.ID))
 
 	//
-	Global.RelyingParty.Origin = os.Getenv("RP_ORIGIN")
-	if err = validation.Validate(&Global.RelyingParty.Origin, validation.Required, is.URL); err != nil {
-		err = fmt.Errorf(`"RP_ORIGIN" %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "RP_ORIGIN", Global.RelyingParty.Origin))
+	// Global.RelyingParty.Origin = os.Getenv("RP_ORIGIN")
+	// if err = validation.Validate(&Global.RelyingParty.Origin, validation.Required, is.URL); err != nil {
+	// 	err = fmt.Errorf(`"RP_ORIGIN" %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "RP_ORIGIN", Global.RelyingParty.Origin))
 
 	//
-	Global.RelyingParty.ServiceName = os.Getenv("RP_SERVICE_NAME")
-	if err = validation.Validate(&Global.RelyingParty.ServiceName, validation.Required); err != nil {
-		err = fmt.Errorf(`"RP_SERVICE_NAME" %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "RP_SERVICE_NAME", Global.RelyingParty.ServiceName))
+	// Global.RelyingParty.ServiceName = os.Getenv("RP_SERVICE_NAME")
+	// if err = validation.Validate(&Global.RelyingParty.ServiceName, validation.Required); err != nil {
+	// 	err = fmt.Errorf(`"RP_SERVICE_NAME" %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "RP_SERVICE_NAME", Global.RelyingParty.ServiceName))
 
 	//
-	Global.Database.Host = os.Getenv("DB_HOST")
-	if err = validation.Validate(&Global.Database.Host, validation.Required, is.Host); err != nil {
-		err = fmt.Errorf(`"DB_HOST" %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_HOST", Global.Database.Host))
+	// Global.Database.Host = os.Getenv("DB_HOST")
+	// if err = validation.Validate(&Global.Database.Host, validation.Required, is.Host); err != nil {
+	// 	err = fmt.Errorf(`"DB_HOST" %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_HOST", Global.Database.Host))
 
 	//
-	dbPortString := os.Getenv("DB_PORT")
-	if err = validation.Validate(&dbPortString, validation.Required, is.Port); err != nil {
-		err = fmt.Errorf(`"DB_PORT" %w`, err)
-		return
-	}
-	if Global.Database.Port, err = strconv.ParseInt(dbPortString, 10, 64); err != nil {
-		err = fmt.Errorf(`error on parsing "DB_PORT": %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%d", "DB_PORT", Global.Database.Port))
+	// dbPortString := os.Getenv("DB_PORT")
+	// if err = validation.Validate(&dbPortString, validation.Required, is.Port); err != nil {
+	// 	err = fmt.Errorf(`"DB_PORT" %w`, err)
+	// 	return
+	// }
+	// if Global.Database.Port, err = strconv.ParseInt(dbPortString, 10, 64); err != nil {
+	// 	err = fmt.Errorf(`error on parsing "DB_PORT": %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%d", "DB_PORT", Global.Database.Port))
 
 	//
-	Global.Database.Username = os.Getenv("DB_USERNAME")
-	if err = validation.Validate(&Global.Database.Username, validation.Required); err != nil {
-		err = fmt.Errorf(`"DB_USERNAME" %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_USERNAME", Global.Database.Username))
+	// Global.Database.Username = os.Getenv("DB_USERNAME")
+	// if err = validation.Validate(&Global.Database.Username, validation.Required); err != nil {
+	// 	err = fmt.Errorf(`"DB_USERNAME" %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_USERNAME", Global.Database.Username))
 
 	//
-	Global.Database.Password = os.Getenv("DB_PASSWORD")
-	if err = validation.Validate(&Global.Database.Password, validation.Required); err != nil {
-		err = fmt.Errorf(`"DB_PASSWORD" %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, "Loaded environment variable DB_PASSWORD=********")
+	// Global.Database.Password = os.Getenv("DB_PASSWORD")
+	// if err = validation.Validate(&Global.Database.Password, validation.Required); err != nil {
+	// 	err = fmt.Errorf(`"DB_PASSWORD" %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, "Loaded environment variable DB_PASSWORD=********")
 
 	//
-	Global.Database.DatabaseName = os.Getenv("DB_NAME")
-	if err = validation.Validate(&Global.Database.DatabaseName, validation.Required); err != nil {
-		err = fmt.Errorf(`"DB_NAME" %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_NAME", Global.Database.DatabaseName))
+	// Global.Database.DatabaseName = os.Getenv("DB_NAME")
+	// if err = validation.Validate(&Global.Database.DatabaseName, validation.Required); err != nil {
+	// 	err = fmt.Errorf(`"DB_NAME" %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_NAME", Global.Database.DatabaseName))
 
 	//
-	privateKeyString := os.Getenv("CLIENT_AUTH_PRIVKEY")
-	if err = validation.Validate(
-		&privateKeyString,
-		validation.Required,
-		validation.Length(64, 64),
-		util.IsHex,
-	); err != nil {
-		err = fmt.Errorf(`"CLIENT_AUTH_PRIVKEY" %w`, err)
-		return
-	}
-	var privateKeyBytes []byte
-	if privateKeyBytes, err = hex.DecodeString(privateKeyString); err != nil {
-		err = fmt.Errorf(`error on parsing "CLIENT_AUTH_PRIVKEY": %w`, err)
-		return
-	}
+	// privateKeyString := os.Getenv("CLIENT_AUTH_PRIVKEY")
+	// if err = validation.Validate(
+	// 	&privateKeyString,
+	// 	validation.Required,
+	// 	validation.Length(64, 64),
+	// 	util.IsHex,
+	// ); err != nil {
+	// 	err = fmt.Errorf(`"CLIENT_AUTH_PRIVKEY" %w`, err)
+	// 	return
+	// }
+	// var privateKeyBytes []byte
+	// if privateKeyBytes, err = hex.DecodeString(privateKeyString); err != nil {
+	// 	err = fmt.Errorf(`error on parsing "CLIENT_AUTH_PRIVKEY": %w`, err)
+	// 	return
+	// }
 
-	if Global.AuthPrivateKey, err = util.ParsePrivateKey(privateKeyBytes); err != nil {
-		err = fmt.Errorf(`error on parsing "CLIENT_AUTH_PRIVKEY": %w`, err)
-		return
-	}
-	log.Info(log.LabelStartup, "Loaded environment variable CLIENT_AUTH_PRIVKEY=********")
+	// if Global.AuthPrivateKey, err = util.ParsePrivateKey(privateKeyBytes); err != nil {
+	// 	err = fmt.Errorf(`error on parsing "CLIENT_AUTH_PRIVKEY": %w`, err)
+	// 	return
+	// }
+	// log.Info(log.LabelStartup, "Loaded environment variable CLIENT_AUTH_PRIVKEY=********")
 
 	return
 }
