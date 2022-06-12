@@ -113,49 +113,49 @@ func InitConfig() (err error) {
 	// }
 	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "RP_SERVICE_NAME", Global.RelyingParty.ServiceName))
 
-	//
-	// Global.Database.Host = os.Getenv("DB_HOST")
-	// if err = validation.Validate(&Global.Database.Host, validation.Required, is.Host); err != nil {
-	// 	err = fmt.Errorf(`"DB_HOST" %w`, err)
-	// 	return
-	// }
-	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_HOST", Global.Database.Host))
+	
+	Global.Database.Host = os.Getenv("DB_HOST")
+	if err = validation.Validate(&Global.Database.Host, validation.Required, is.Host); err != nil {
+		err = fmt.Errorf(`"DB_HOST" %w`, err)
+		return
+	}
+	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_HOST", Global.Database.Host))
 
 	//
-	// dbPortString := os.Getenv("DB_PORT")
-	// if err = validation.Validate(&dbPortString, validation.Required, is.Port); err != nil {
-	// 	err = fmt.Errorf(`"DB_PORT" %w`, err)
-	// 	return
-	// }
-	// if Global.Database.Port, err = strconv.ParseInt(dbPortString, 10, 64); err != nil {
-	// 	err = fmt.Errorf(`error on parsing "DB_PORT": %w`, err)
-	// 	return
-	// }
-	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%d", "DB_PORT", Global.Database.Port))
+	dbPortString := os.Getenv("DB_PORT")
+	if err = validation.Validate(&dbPortString, validation.Required, is.Port); err != nil {
+		err = fmt.Errorf(`"DB_PORT" %w`, err)
+		return
+	}
+	if Global.Database.Port, err = strconv.ParseInt(dbPortString, 10, 64); err != nil {
+		err = fmt.Errorf(`error on parsing "DB_PORT": %w`, err)
+		return
+	}
+	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%d", "DB_PORT", Global.Database.Port))
 
 	//
-	// Global.Database.Username = os.Getenv("DB_USERNAME")
-	// if err = validation.Validate(&Global.Database.Username, validation.Required); err != nil {
-	// 	err = fmt.Errorf(`"DB_USERNAME" %w`, err)
-	// 	return
-	// }
-	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_USERNAME", Global.Database.Username))
+	Global.Database.Username = os.Getenv("DB_USERNAME")
+	if err = validation.Validate(&Global.Database.Username, validation.Required); err != nil {
+		err = fmt.Errorf(`"DB_USERNAME" %w`, err)
+		return
+	}
+	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_USERNAME", Global.Database.Username))
 
 	//
-	// Global.Database.Password = os.Getenv("DB_PASSWORD")
-	// if err = validation.Validate(&Global.Database.Password, validation.Required); err != nil {
-	// 	err = fmt.Errorf(`"DB_PASSWORD" %w`, err)
-	// 	return
-	// }
-	// log.Info(log.LabelStartup, "Loaded environment variable DB_PASSWORD=********")
+	Global.Database.Password = os.Getenv("DB_PASSWORD")
+	if err = validation.Validate(&Global.Database.Password, validation.Required); err != nil {
+		err = fmt.Errorf(`"DB_PASSWORD" %w`, err)
+		return
+	}
+	log.Info(log.LabelStartup, "Loaded environment variable DB_PASSWORD=********")
 
 	//
-	// Global.Database.DatabaseName = os.Getenv("DB_NAME")
-	// if err = validation.Validate(&Global.Database.DatabaseName, validation.Required); err != nil {
-	// 	err = fmt.Errorf(`"DB_NAME" %w`, err)
-	// 	return
-	// }
-	// log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_NAME", Global.Database.DatabaseName))
+	Global.Database.DatabaseName = os.Getenv("DB_NAME")
+	if err = validation.Validate(&Global.Database.DatabaseName, validation.Required); err != nil {
+		err = fmt.Errorf(`"DB_NAME" %w`, err)
+		return
+	}
+	log.Info(log.LabelStartup, fmt.Sprintf("Loaded environment variable %s=%s", "DB_NAME", Global.Database.DatabaseName))
 
 	//
 	// privateKeyString := os.Getenv("CLIENT_AUTH_PRIVKEY")
