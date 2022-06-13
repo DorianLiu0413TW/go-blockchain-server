@@ -33,6 +33,7 @@ type InternalServerConfig struct {
 	AuthPrivateKey *ecdsa.PrivateKey
 }
 
+
 type Config struct {
 	TimeZone          *time.Location
 	AllowOrigins      []string
@@ -41,7 +42,10 @@ type Config struct {
 	RelyingParty      RelyingPartyConfig
 	Database          DatabaseConfig
 	AuthPrivateKey    *ecdsa.PrivateKey
+	Rpc							  string
 }
+
+
 
 var Global *Config
 
@@ -180,5 +184,12 @@ func InitConfig() (err error) {
 	// }
 	// log.Info(log.LabelStartup, "Loaded environment variable CLIENT_AUTH_PRIVKEY=********")
 
+	//
+	Global.Rpc = os.Getenv("RPC_URL")
+	if err = validation.Validate(&Global.Rpc, validation.Required); err != nil {
+		err = fmt.Errorf(`"RPC_URL" %w`, err)
+		return
+	}
+	log.Info(log.LabelStartup, "Loaded environment variable RPC_URL=********")
 	return
 }
